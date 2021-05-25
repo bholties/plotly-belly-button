@@ -18,3 +18,21 @@ var drawChart = function(x_data, y_data, hoverText, metadata) {
     var data = [trace];
   
     Plotly.newPlot('bar', data);
+
+    var trace2 = {
+        x: x_data,
+        y: y_data,
+        text: hoverText,
+        mode: 'markers',
+        marker: {
+            size: y_data,
+            color: x_data
+        }
+    };
+  
+    var data2 = [trace2];
+  
+    Plotly.newPlot('bubble', data2);
+  
+  
+  };
