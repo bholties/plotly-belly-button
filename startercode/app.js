@@ -36,3 +36,35 @@ var drawChart = function(x_data, y_data, hoverText, metadata) {
   
   
   };
+
+  var populateDropdown = function(names) {
+
+    var selectTag = d3.select("#selDataset");
+    var options = selectTag.selectAll('option').data(names);
+  
+    options.enter()
+        .append('option')
+        .attr('value', function(d) {
+            return d;
+        })
+        .text(function(d) {
+            return d;
+        });
+  
+  };
+
+  var optionChanged = function(newValue) {
+
+    d3.json("data/samples.json").then(function(data) {
+  
+    sample_new = data["samples"].filter(function(sample) {
+  
+        return sample.id == newValue;
+  
+    });
+    
+    metadata_new = data["metadata"].filter(function(metadata) {
+  
+        return metadata.id == newValue;
+  
+});
