@@ -37,6 +37,30 @@ var drawChart = function(x_data, y_data, hoverText, metadata) {
   
   };
 
+  var xval = data.otu_ids;
+  var yval = data.sample_values;
+  var label = data.otu_labels;
+  var size = data.sample_values;
+
+  var bubbles = {
+    x: xval,
+    y: yval,
+    label: label,
+    mode: 'markers',
+    marker: {
+      size: size,
+      color: xval
+    }
+  }
+  var data = [bubbles];
+
+  var layout = {
+    title: "Bacteria Size",
+  };
+  Plotly.newPlot("bubble",data,layout);
+
+
+
   var populateDropdown = function(names) {
 
     var selectTag = d3.select("#selDataset");
@@ -67,4 +91,31 @@ var drawChart = function(x_data, y_data, hoverText, metadata) {
   
         return metadata.id == newValue;
   
+});
+
+x_data = sample_new[0]["otu_ids"];
+y_data = sample_new[0]["sample_values"];
+hoverText = sample_new[0]["otu_labels"];
+
+console.log(x_data);
+console.log(y_data);
+console.log(hoverText);
+
+drawChart(x_data, y_data, hoverText, metadata_new[0]);
+});
+
+d3.json("data/samples.json").then(function(data) {
+
+populateDropdown(data["names"]);
+
+
+x_data = data["samples"][0]["otu_ids"];
+y_data = data["samples"][0]["sample_values"];
+hoverText = data["samples"][0]["otu_labels"];
+metadata = data["metadata"][0];
+
+
+drawChart(x_data, y_data, hoverText, metadata);
+
+
 });
