@@ -1,3 +1,8 @@
+d3.json("./Data/samples.json").then(function(data) {
+  console.log("Data loaded from samples.json:");
+  console.log(data);
+})
+
 var drawChart = function(x_data, y_data, hoverText, metadata) {
 
 
@@ -9,7 +14,10 @@ var drawChart = function(x_data, y_data, hoverText, metadata) {
   function buildCharts(sample) {
 
     // Use `d3.json` to fetch the sample data for the plots
-    d3.json("samples.json").then((data) => {
+    d3.json("./Data/samples.json").then(function(data) {
+      console.log("Data loaded from samples.json:");
+      console.log(data);
+    }) 
       var samples= data.samples;
       var resultsarray= samples.filter(sampleobject => sampleobject.id == sample);
       var result= resultsarray[0]
@@ -46,7 +54,7 @@ var drawChart = function(x_data, y_data, hoverText, metadata) {
   Plotly.newPlot('bubble', data2);
 
 
-});
+}
 
 var xval = data.otu_ids;
 var yval = data.sample_values;
@@ -136,4 +144,4 @@ d3.json("Data/samples.json").then(function(data)
 
   }
 
-}
+
